@@ -16,25 +16,24 @@ const Index = () => {
         <source src={videoUrl} type="video/mp4" />
       </video>
 
-      <div className="absolute inset-0 bg-black/30 z-10" />
+      <div className="absolute inset-0 bg-black/20 z-10" />
+
+      <div className="absolute inset-0 border-[3px] border-white z-30 pointer-events-none m-4 md:m-8" />
 
       <div className="relative z-20 flex flex-col items-center justify-center h-full px-6 text-center">
-        <h1 className="font-montserrat font-bold text-white text-5xl md:text-7xl lg:text-8xl mb-6 animate-fade-in tracking-tight">
-          Скоро здесь
+        <h1 className="font-montserrat font-light text-white text-4xl md:text-5xl lg:text-6xl mb-4 animate-fade-in tracking-[0.2em] uppercase">
+          LXV
         </h1>
-        <p className="font-open-sans font-light text-white/90 text-lg md:text-xl lg:text-2xl mb-12 max-w-2xl animate-fade-in" style={{ animationDelay: '0.2s' }}>
-          Что-то особенное уже в пути
+        <p className="font-open-sans font-light text-white/80 text-sm md:text-base lg:text-lg mb-16 max-w-md animate-fade-in tracking-wide" style={{ animationDelay: '0.2s' }}>
+          Эксклюзивная коллекция премиум-класса
         </p>
-        <Button 
-          size="lg"
-          className="font-open-sans font-semibold text-lg px-12 py-6 bg-white text-[#1A1F2C] hover:bg-white/90 transition-all duration-300 hover:scale-105 animate-scale-in shadow-2xl"
+        <button
+          className="font-open-sans font-normal text-white text-sm md:text-base tracking-[0.3em] uppercase px-12 py-4 border-2 border-white/60 hover:bg-white/10 hover:border-white transition-all duration-300 animate-scale-in backdrop-blur-sm"
           style={{ animationDelay: '0.4s' }}
         >
           Забронировать
-        </Button>
+        </button>
       </div>
-
-
     </div>
   );
 };
