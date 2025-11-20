@@ -12,32 +12,49 @@ const Index = () => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [guests, setGuests] = useState('2');
+  const [isMobile, setIsMobile] = useState(false);
+  const [videoLoaded, setVideoLoaded] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    if (videoRef.current) {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  useEffect(() => {
+    if (videoRef.current && !isMobile) {
       videoRef.current.play().catch(err => {
         console.log('Autoplay prevented:', err);
       });
     }
-  }, []);
+  }, [isMobile]);
 
   return (
     <div className="relative w-full h-screen overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-black">
-      <video
-        ref={videoRef}
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute top-0 left-0 w-full h-full object-cover opacity-70"
-        onError={(e) => {
-          console.error('Video failed to load');
-          e.currentTarget.style.display = 'none';
-        }}
-      >
-        <source src={videoUrl} type="video/mp4" />
-      </video>
+      {!isMobile && (
+        <video
+          ref={videoRef}
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="metadata"
+          className={`absolute top-0 left-0 w-full h-full object-cover opacity-70 transition-opacity duration-700 ${videoLoaded ? 'opacity-70' : 'opacity-0'}`}
+          onLoadedData={() => setVideoLoaded(true)}
+          onError={(e) => {
+            console.error('Video failed to load');
+            e.currentTarget.style.display = 'none';
+          }}
+        >
+          <source src={videoUrl} type="video/mp4" />
+        </video>
+      )}
 
       <div className="absolute inset-0 bg-black/20 z-10" />
 
