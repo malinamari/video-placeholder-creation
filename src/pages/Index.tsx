@@ -83,13 +83,13 @@ const Index = () => {
       </div>
 
       {showBooking && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
-          <div className="bg-gray-900/95 border border-white/20 p-8 max-w-md w-full max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4">
+          <div className="bg-gray-900 border border-white/30 shadow-2xl p-6 md:p-8 max-w-md w-full max-h-[90vh] overflow-y-auto rounded-lg">
             <div className="flex justify-between items-center mb-6">
-              <h2 className="font-ony65 text-white/80 text-2xl tracking-[0.2em] uppercase">Бронирование</h2>
+              <h2 className="font-ony65 text-white text-xl md:text-2xl tracking-[0.2em] uppercase">Бронирование</h2>
               <button
                 onClick={() => setShowBooking(false)}
-                className="text-white/60 hover:text-white text-2xl"
+                className="text-white hover:text-white/60 text-3xl leading-none"
               >
                 ×
               </button>
