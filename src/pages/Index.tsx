@@ -32,17 +32,18 @@ const Index = () => {
 
       <div className="absolute inset-0 bg-black/20 z-10" />
 
-      <div className="absolute inset-0 border-[3px] border-white z-30 pointer-events-none m-4 md:m-8" />
+      <div className="absolute inset-0 border border-white/30 z-30 pointer-events-none m-4 md:m-8" />
 
       <div className="relative z-20 flex flex-col items-center justify-between h-full px-6 py-8 md:py-12 text-center">
-        <h1 className="font-montserrat font-light text-white text-4xl md:text-5xl lg:text-6xl animate-fade-in tracking-[0.2em] uppercase">
+        <h1 className="font-montserrat font-extralight text-white/40 text-4xl md:text-5xl lg:text-6xl animate-fade-in tracking-[0.3em] uppercase">
           LXV
         </h1>
         <button
-          className="font-open-sans font-normal text-white text-sm md:text-base tracking-[0.3em] uppercase px-12 py-4 border-2 border-white/60 hover:bg-white/10 hover:border-white transition-all duration-300 animate-scale-in backdrop-blur-sm"
+          className="relative font-open-sans font-light text-white text-sm md:text-base tracking-[0.4em] uppercase px-8 pb-3 transition-all duration-500 group"
           style={{ animationDelay: '0.4s' }}
         >
-          Посетить клуб
+          <span className="relative z-10">ВОЙТИ</span>
+          <div className="absolute bottom-0 left-0 w-full h-[1px] bg-white/80 group-hover:bg-white group-hover:shadow-[0_0_10px_rgba(255,255,255,0.8)] transition-all duration-300" />
         </button>
       </div>
     </div>
