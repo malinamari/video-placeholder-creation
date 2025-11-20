@@ -32,12 +32,12 @@ const Index = () => {
 
       <div className="absolute inset-0 bg-black/20 z-10" />
 
-      <svg className="absolute inset-0 w-full h-full z-30 pointer-events-none" style={{ padding: '16px' }}>
+      <svg className="absolute inset-0 w-full h-full z-30 pointer-events-none">
         <defs>
           <mask id="frame-mask">
             <rect width="100%" height="100%" fill="white" />
-            <text x="50%" y="10%" textAnchor="middle" fontSize="60" fontWeight="200" letterSpacing="8" fill="black" fontFamily="Montserrat">LXV</text>
-            <text x="50%" y="96%" textAnchor="middle" fontSize="16" fontWeight="300" letterSpacing="6" fill="black" fontFamily="Open Sans">ВОЙТИ</text>
+            <text x="50%" y="32" dominantBaseline="middle" textAnchor="middle" fontSize="60" fontWeight="200" letterSpacing="12" fill="black" fontFamily="Montserrat">LXV</text>
+            <text x="50%" y="calc(100% - 32px)" dominantBaseline="middle" textAnchor="middle" fontSize="16" fontWeight="300" letterSpacing="6" fill="black" fontFamily="Open Sans">ВОЙТИ</text>
           </mask>
         </defs>
         <rect 
@@ -52,12 +52,12 @@ const Index = () => {
         />
       </svg>
 
-      <div className="relative z-40 flex flex-col items-center justify-between h-full px-6 py-8 md:py-12 text-center">
+      <div className="relative z-40 flex flex-col items-center justify-between h-full" style={{ padding: '16px' }}>
         <h1 className="font-montserrat font-extralight text-white/40 text-4xl md:text-5xl lg:text-6xl animate-fade-in tracking-[0.3em] uppercase">
           LXV
         </h1>
         <button
-          className="relative font-open-sans font-light text-white text-sm md:text-base tracking-[0.4em] uppercase px-8 pb-3 transition-all duration-500 group"
+          className="relative font-open-sans font-light text-white text-sm md:text-base tracking-[0.4em] uppercase px-8 transition-all duration-500 group"
           style={{ animationDelay: '0.4s' }}
         >
           <span className="relative z-10">ВОЙТИ</span>
