@@ -45,7 +45,7 @@ const Index = () => {
           className="font-open-sans font-normal text-white text-sm md:text-base tracking-[0.3em] uppercase px-12 py-4 border-2 border-white/60 hover:bg-white/10 hover:border-white transition-all duration-300 animate-scale-in backdrop-blur-sm"
           style={{ animationDelay: '0.4s' }}
         >
-          Забронировать
+          Посетить клуб
         </button>
       </div>
     </div>
