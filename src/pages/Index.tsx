@@ -16,6 +16,7 @@ const Index = () => {
   const [agreedToPrivacy, setAgreedToPrivacy] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const [isMobile, setIsMobile] = useState(false);
   const [videoLoaded, setVideoLoaded] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -250,12 +251,14 @@ const Index = () => {
 
               <button
                 onClick={async () => {
+                  setErrorMessage('');
+                  
                   if (!agreedToPrivacy) {
-                    alert('Пожалуйста, дайте согласие на обработку персональных данных');
+                    setErrorMessage('Пожалуйста, дайте согласие на обработку персональных данных');
                     return;
                   }
                   if (!name || !phone) {
-                    alert('Пожалуйста, заполните все обязательные поля');
+                    setErrorMessage('Пожалуйста, заполните все обязательные поля');
                     return;
                   }
                   
@@ -285,10 +288,10 @@ const Index = () => {
                         setAgreedToPrivacy(false);
                       }, 3000);
                     } else {
-                      alert('Произошла ошибка. Пожалуйста, попробуйте позже или позвоните нам.');
+                      setErrorMessage('Произошла ошибка. Пожалуйста, попробуйте позже или позвоните нам.');
                     }
                   } catch (error) {
-                    alert('Произошла ошибка. Пожалуйста, попробуйте позже или позвоните нам.');
+                    setErrorMessage('Произошла ошибка. Пожалуйста, попробуйте позже или позвоните нам.');
                   } finally {
                     setIsSubmitting(false);
                   }
@@ -298,6 +301,14 @@ const Index = () => {
               >
                 {isSubmitting ? 'Отправка...' : 'Забронировать'}
               </button>
+
+              {errorMessage && (
+                <div className="mt-4 p-4 bg-red-900/30 border border-red-500/50 rounded">
+                  <p className="text-red-200 text-center text-sm">
+                    {errorMessage}
+                  </p>
+                </div>
+              )}
 
               {showSuccessMessage && (
                 <div className="mt-4 p-4 bg-green-900/30 border border-green-500/50 rounded">
