@@ -32,9 +32,27 @@ const Index = () => {
 
       <div className="absolute inset-0 bg-black/20 z-10" />
 
-      <div className="absolute inset-0 border border-white/30 z-30 pointer-events-none m-4 md:m-8" />
+      <svg className="absolute inset-0 w-full h-full z-30 pointer-events-none" style={{ padding: '16px' }}>
+        <defs>
+          <mask id="frame-mask">
+            <rect width="100%" height="100%" fill="white" />
+            <text x="50%" y="10%" textAnchor="middle" fontSize="60" fontWeight="200" letterSpacing="8" fill="black" fontFamily="Montserrat">LXV</text>
+            <text x="50%" y="96%" textAnchor="middle" fontSize="16" fontWeight="300" letterSpacing="6" fill="black" fontFamily="Open Sans">ВОЙТИ</text>
+          </mask>
+        </defs>
+        <rect 
+          x="16" 
+          y="16" 
+          width="calc(100% - 32px)" 
+          height="calc(100% - 32px)" 
+          fill="none" 
+          stroke="rgba(255,255,255,0.3)" 
+          strokeWidth="1"
+          mask="url(#frame-mask)"
+        />
+      </svg>
 
-      <div className="relative z-20 flex flex-col items-center justify-between h-full px-6 py-8 md:py-12 text-center">
+      <div className="relative z-40 flex flex-col items-center justify-between h-full px-6 py-8 md:py-12 text-center">
         <h1 className="font-montserrat font-extralight text-white/40 text-4xl md:text-5xl lg:text-6xl animate-fade-in tracking-[0.3em] uppercase">
           LXV
         </h1>
