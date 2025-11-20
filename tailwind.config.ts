@@ -70,7 +70,8 @@ export default {
 			},
 			fontFamily: {
 				'montserrat': ['Montserrat', 'sans-serif'],
-				'open-sans': ['Open Sans', 'sans-serif']
+				'open-sans': ['Open Sans', 'sans-serif'],
+				'ony65': ['ONY65', 'sans-serif']
 			},
 			keyframes: {
 				'accordion-down': {

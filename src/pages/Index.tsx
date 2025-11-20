@@ -41,7 +41,7 @@ const Index = () => {
 
       <div className="relative z-40 flex flex-col items-center justify-between h-full px-6 py-12">
         <div className="relative">
-          <h1 className="font-montserrat font-extralight text-white/40 text-6xl md:text-7xl lg:text-8xl animate-fade-in tracking-[0.3em] uppercase bg-gradient-to-br from-gray-900 via-gray-800 to-black px-8" style={{ lineHeight: '1.2' }}>
+          <h1 className="font-ony65 font-normal text-white/40 text-6xl md:text-7xl lg:text-8xl animate-fade-in tracking-[0.3em] uppercase bg-gradient-to-br from-gray-900 via-gray-800 to-black px-8" style={{ lineHeight: '1.2' }}>
             LXV
           </h1>
         </div>
