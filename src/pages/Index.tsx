@@ -13,6 +13,9 @@ const Index = () => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [guests, setGuests] = useState('2');
+  const [agreedToPrivacy, setAgreedToPrivacy] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [videoLoaded, setVideoLoaded] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -232,15 +235,77 @@ const Index = () => {
                 </div>
               </div>
 
+              <div className="flex items-start gap-3 mb-4">
+                <input
+                  type="checkbox"
+                  id="privacy-checkbox"
+                  checked={agreedToPrivacy}
+                  onChange={(e) => setAgreedToPrivacy(e.target.checked)}
+                  className="mt-1 w-4 h-4 bg-black/40 border border-white/20 rounded cursor-pointer"
+                />
+                <label htmlFor="privacy-checkbox" className="text-white/60 text-xs leading-relaxed cursor-pointer">
+                  Я согласен на обработку персональных данных в соответствии с политикой конфиденциальности
+                </label>
+              </div>
+
               <button
-                onClick={() => {
-                  alert(`Бронирование создано!\nИмя: ${name}\nТелефон: ${phone}\nГостей: ${guests}\nДата: ${selectedDate ? format(selectedDate, 'dd MMMM yyyy', { locale: ru }) : 'не выбрана'}`);
-                  setShowBooking(false);
+                onClick={async () => {
+                  if (!agreedToPrivacy) {
+                    alert('Пожалуйста, дайте согласие на обработку персональных данных');
+                    return;
+                  }
+                  if (!name || !phone) {
+                    alert('Пожалуйста, заполните все обязательные поля');
+                    return;
+                  }
+                  
+                  setIsSubmitting(true);
+                  
+                  try {
+                    const response = await fetch('https://functions.poehali.dev/424e0d69-a571-4086-8e09-8fa63cd0a87d', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({
+                        name,
+                        phone,
+                        guests,
+                        date: selectedDate ? format(selectedDate, 'dd MMMM yyyy', { locale: ru }) : 'не выбрана'
+                      })
+                    });
+                    
+                    if (response.ok) {
+                      setShowSuccessMessage(true);
+                      setTimeout(() => {
+                        setShowSuccessMessage(false);
+                        setShowBooking(false);
+                        setName('');
+                        setPhone('');
+                        setGuests('2');
+                        setSelectedDate(undefined);
+                        setAgreedToPrivacy(false);
+                      }, 3000);
+                    } else {
+                      alert('Произошла ошибка. Пожалуйста, попробуйте позже или позвоните нам.');
+                    }
+                  } catch (error) {
+                    alert('Произошла ошибка. Пожалуйста, попробуйте позже или позвоните нам.');
+                  } finally {
+                    setIsSubmitting(false);
+                  }
                 }}
-                className="w-full font-open-sans font-light text-white text-sm tracking-[0.3em] uppercase px-8 py-3 border border-white/40 hover:bg-white/10 transition-all duration-500"
+                disabled={!agreedToPrivacy || isSubmitting}
+                className="w-full font-open-sans font-light text-white text-sm tracking-[0.3em] uppercase px-8 py-3 border border-white/40 hover:bg-white/10 transition-all duration-500 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Забронировать
+                {isSubmitting ? 'Отправка...' : 'Забронировать'}
               </button>
+
+              {showSuccessMessage && (
+                <div className="mt-4 p-4 bg-green-900/30 border border-green-500/50 rounded">
+                  <p className="text-white text-center text-sm">
+                    Спасибо! Ваша заявка принята.<br />Мы свяжемся с вами в ближайшее время.
+                  </p>
+                </div>
+              )}
             </div>
           </div>
         </div>
