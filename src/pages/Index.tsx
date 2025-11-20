@@ -4,6 +4,7 @@ import { DayPicker } from 'react-day-picker';
 import { format } from 'date-fns';
 import { ru } from 'date-fns/locale';
 import 'react-day-picker/dist/style.css';
+import { Helmet } from 'react-helmet';
 
 const Index = () => {
   const [videoUrl] = useState('/FANCY_LXV_6_горизонт (1) (1).mp4');
@@ -36,7 +37,48 @@ const Index = () => {
   }, [isMobile]);
 
   return (
-    <div className="relative w-full h-screen overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-black">
+    <>
+      <Helmet>
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "NightClub",
+              "name": "LXV",
+              "description": "Закрытый клуб на 65 этаже в Москва-Сити с захватывающим панорамным видом на исторический центр Москвы",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Москва",
+                "addressCountry": "RU",
+                "addressRegion": "Москва"
+              },
+              "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": "55.7495",
+                "longitude": "37.5384"
+              },
+              "url": "https://lxv-club.poehali.app",
+              "telephone": "+7",
+              "priceRange": "$$$$",
+              "servesCuisine": "International",
+              "acceptsReservations": "True",
+              "amenityFeature": [
+                {
+                  "@type": "LocationFeatureSpecification",
+                  "name": "Панорамный вид",
+                  "value": true
+                },
+                {
+                  "@type": "LocationFeatureSpecification",
+                  "name": "65 этаж",
+                  "value": true
+                }
+              ]
+            }
+          `}
+        </script>
+      </Helmet>
+      <div className="relative w-full h-screen overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-black">
       {!isMobile && (
         <video
           ref={videoRef}
@@ -163,7 +205,8 @@ const Index = () => {
           </div>
         </div>
       )}
-    </div>
+      </div>
+    </>
   );
 };
 
