@@ -44,6 +44,7 @@ const Index = () => {
   return (
     <>
       <Helmet>
+        <meta name="yandex-verification" content="1969af86f5b92d48" />
         <script type="application/ld+json">
           {`
             {
