@@ -34,7 +34,7 @@ const Index = () => {
 
       <div className="absolute inset-0 border-[3px] border-white z-30 pointer-events-none m-4 md:m-8" />
 
-      <div className="relative z-20 flex flex-col items-center justify-center h-full px-6 text-center">
+      <div className="relative z-20 flex flex-col items-center justify-end h-full px-6 pb-32 text-center">
         <h1 className="font-montserrat font-light text-white text-4xl md:text-5xl lg:text-6xl mb-4 animate-fade-in tracking-[0.2em] uppercase">
           LXV
         </h1>
