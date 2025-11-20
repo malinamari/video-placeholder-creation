@@ -41,13 +41,13 @@ const Index = () => {
 
       <div className="relative z-40 flex flex-col items-center justify-between h-full px-6 py-12">
         <div className="relative">
-          <h1 className="font-ony65 font-normal text-white/40 text-6xl md:text-7xl lg:text-8xl animate-fade-in tracking-[0.3em] uppercase bg-gradient-to-br from-gray-900 via-gray-800 to-black px-8" style={{ lineHeight: '1.2' }}>
+          <h1 className="font-ony65 font-normal text-white/40 text-3xl md:text-4xl lg:text-4xl animate-fade-in tracking-[0.3em] uppercase px-8" style={{ lineHeight: '1.2' }}>
             LXV
           </h1>
         </div>
         <div className="relative">
           <button
-            className="font-open-sans font-light text-white text-sm md:text-base tracking-[0.4em] uppercase px-8 py-2 transition-all duration-500 group bg-gradient-to-br from-gray-900 via-gray-800 to-black"
+            className="font-open-sans font-light text-white text-sm md:text-base tracking-[0.4em] uppercase px-8 py-2 transition-all duration-500 group"
             style={{ animationDelay: '0.4s' }}
           >
             ВОЙТИ
