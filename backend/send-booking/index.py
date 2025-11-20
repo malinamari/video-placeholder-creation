@@ -48,6 +48,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         phone = body_data.get('phone', '')
         guests = body_data.get('guests', '')
         date = body_data.get('date', 'не выбрана')
+        comment = body_data.get('comment', '')
     except json.JSONDecodeError:
         return {
             'statusCode': 400,
@@ -87,14 +88,20 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         }
     
     # Format message for Telegram
-    message = f"""
-🆕 Новая заявка на бронирование LXV Club
-
-👤 Имя: {name}
-📞 Телефон: {phone}
-👥 Количество гостей: {guests}
-📅 Дата: {date}
-    """.strip()
+    message_parts = [
+        "🆕 Новая заявка на бронирование LXV Club",
+        "",
+        f"👤 ФИО: {name}",
+        f"📞 Телефон: {phone}",
+        f"👥 Количество гостей: {guests}",
+        f"📅 Дата: {date}"
+    ]
+    
+    if comment:
+        message_parts.append("")
+        message_parts.append(f"💬 Комментарий: {comment}")
+    
+    message = "\n".join(message_parts)
     
     # Send message to Telegram
     try:

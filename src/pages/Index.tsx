@@ -11,7 +11,8 @@ const Index = () => {
   const [showBooking, setShowBooking] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Date>();
   const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
+  const [phone, setPhone] = useState('+7 ');
+  const [comment, setComment] = useState('');
   const [guests, setGuests] = useState('2');
   const [agreedToPrivacy, setAgreedToPrivacy] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -183,24 +184,40 @@ const Index = () => {
 
             <div className="space-y-6">
               <div>
-                <label className="block text-white/60 text-sm tracking-wider mb-2 uppercase">Имя</label>
+                <label className="block text-white/60 text-sm tracking-wider mb-2 uppercase">ФИО *</label>
                 <input
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   className="w-full bg-black/40 border border-white/20 text-white px-4 py-2 focus:outline-none focus:border-white/40 transition-colors"
-                  placeholder="Ваше имя"
+                  placeholder="Иванов Иван Иванович"
                 />
               </div>
 
               <div>
-                <label className="block text-white/60 text-sm tracking-wider mb-2 uppercase">Телефон</label>
+                <label className="block text-white/60 text-sm tracking-wider mb-2 uppercase">Телефон *</label>
                 <input
                   type="tel"
                   value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    if (value.startsWith('+7 ')) {
+                      setPhone(value);
+                    } else if (value.length < phone.length) {
+                      if (value === '+7') {
+                        setPhone('+7 ');
+                      } else {
+                        setPhone(value);
+                      }
+                    }
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Backspace' && phone === '+7 ') {
+                      e.preventDefault();
+                    }
+                  }}
                   className="w-full bg-black/40 border border-white/20 text-white px-4 py-2 focus:outline-none focus:border-white/40 transition-colors"
-                  placeholder="+7 (___) ___-__-__"
+                  placeholder="+7 (999) 123-45-67"
                 />
               </div>
 
@@ -236,6 +253,17 @@ const Index = () => {
                 </div>
               </div>
 
+              <div>
+                <label className="block text-white/60 text-sm tracking-wider mb-2 uppercase">Комментарий</label>
+                <textarea
+                  value={comment}
+                  onChange={(e) => setComment(e.target.value)}
+                  className="w-full bg-black/40 border border-white/20 text-white px-4 py-2 focus:outline-none focus:border-white/40 transition-colors resize-none"
+                  placeholder="Дополнительные пожелания или вопросы"
+                  rows={3}
+                />
+              </div>
+
               <div className="flex items-start gap-3 mb-4">
                 <input
                   type="checkbox"
@@ -257,8 +285,8 @@ const Index = () => {
                     setErrorMessage('Пожалуйста, дайте согласие на обработку персональных данных');
                     return;
                   }
-                  if (!name || !phone) {
-                    setErrorMessage('Пожалуйста, заполните все обязательные поля');
+                  if (!name || !phone || phone === '+7 ') {
+                    setErrorMessage('Пожалуйста, заполните все обязательные поля (ФИО и телефон)');
                     return;
                   }
                   
@@ -272,7 +300,8 @@ const Index = () => {
                         name,
                         phone,
                         guests,
-                        date: selectedDate ? format(selectedDate, 'dd MMMM yyyy', { locale: ru }) : 'не выбрана'
+                        date: selectedDate ? format(selectedDate, 'dd MMMM yyyy', { locale: ru }) : 'не выбрана',
+                        comment
                       })
                     });
                     
@@ -282,16 +311,17 @@ const Index = () => {
                         setShowSuccessMessage(false);
                         setShowBooking(false);
                         setName('');
-                        setPhone('');
+                        setPhone('+7 ');
                         setGuests('2');
                         setSelectedDate(undefined);
+                        setComment('');
                         setAgreedToPrivacy(false);
                       }, 3000);
                     } else {
-                      setErrorMessage('Произошла ошибка. Пожалуйста, попробуйте позже или позвоните нам.');
+                      setErrorMessage('Произошла ошибка. Пожалуйста, попробуйте позже или позвоните нам: +7 925 650-65-65');
                     }
                   } catch (error) {
-                    setErrorMessage('Произошла ошибка. Пожалуйста, попробуйте позже или позвоните нам.');
+                    setErrorMessage('Произошла ошибка. Пожалуйста, попробуйте позже или позвоните нам: +7 925 650-65-65');
                   } finally {
                     setIsSubmitting(false);
                   }
