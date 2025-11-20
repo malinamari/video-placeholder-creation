@@ -50,7 +50,7 @@ const Index = () => {
             className="font-open-sans font-light text-white text-sm md:text-base tracking-[0.4em] uppercase px-8 py-2 transition-all duration-500 group"
             style={{ animationDelay: '0.4s' }}
           >
-            ВОЙТИ
+            ПОСЕТИТЬ КЛУБ
           </button>
         </div>
       </div>
