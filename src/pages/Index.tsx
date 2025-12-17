@@ -5,6 +5,7 @@ import { format } from 'date-fns';
 import { ru } from 'date-fns/locale';
 import 'react-day-picker/dist/style.css';
 import { Helmet } from 'react-helmet';
+import Icon from '@/components/ui/icon';
 
 const Index = () => {
   const [videoUrl] = useState('/FANCY_LXV_6_горизонт (1) (1).mp4');
@@ -20,6 +21,7 @@ const Index = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [isMobile, setIsMobile] = useState(false);
   const [videoLoaded, setVideoLoaded] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -152,6 +154,52 @@ const Index = () => {
         <div className="absolute right-0 top-0 bottom-0 w-[1px] bg-white/30" />
         <div className="absolute left-0 right-0 bottom-0 h-[1px] bg-white/30" />
       </div>
+
+      <button
+        onClick={() => setShowMenu(!showMenu)}
+        className="fixed top-6 right-6 z-50 text-white/60 hover:text-white transition-colors duration-300"
+        aria-label="Меню"
+      >
+        <Icon name="Menu" size={28} />
+      </button>
+
+      {showMenu && (
+        <div className="fixed top-20 right-6 z-50 bg-gray-900/95 backdrop-blur-md border border-white/30 rounded-lg shadow-2xl p-6 min-w-[250px]">
+          <button
+            onClick={() => setShowMenu(false)}
+            className="absolute top-3 right-3 text-white/60 hover:text-white text-2xl leading-none"
+          >
+            ×
+          </button>
+          <div className="space-y-4 mt-2">
+            <a
+              href="https://t.me/lxvmoscow"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 text-white/80 hover:text-white transition-colors group"
+            >
+              <Icon name="Send" size={20} className="group-hover:scale-110 transition-transform" />
+              <span className="font-open-sans tracking-wider">Telegram</span>
+            </a>
+            <a
+              href="https://instagram.com/lxv.moscow"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 text-white/80 hover:text-white transition-colors group"
+            >
+              <Icon name="Instagram" size={20} className="group-hover:scale-110 transition-transform" />
+              <span className="font-open-sans tracking-wider">Instagram</span>
+            </a>
+            <a
+              href="tel:+79999999999"
+              className="flex items-center gap-3 text-white/80 hover:text-white transition-colors group"
+            >
+              <Icon name="Phone" size={20} className="group-hover:scale-110 transition-transform" />
+              <span className="font-open-sans tracking-wider">Позвонить</span>
+            </a>
+          </div>
+        </div>
+      )}
 
       <div className="relative z-40 flex flex-col items-center justify-between h-full px-6 py-12">
         <div className="relative">
